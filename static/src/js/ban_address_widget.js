@@ -15,7 +15,11 @@ export class BanAddressWidget extends Component {
     };
 
     setup() {
-        this.state = useState({ suggestions: [], open: false });
+        this.state = useState({
+            suggestions: [],
+            open: false,
+            inputValue: this.props.record.data[this.props.name] || "",
+        });
         this.inputRef = useRef("input");
         this.orm = useService("orm");
         this.debouncedFetch = useDebounced(this._fetchBan.bind(this), 350);
@@ -26,10 +30,12 @@ export class BanAddressWidget extends Component {
     }
 
     onInput(ev) {
+        this.state.inputValue = ev.target.value;
         this.debouncedFetch(ev.target.value);
     }
 
     onChange(ev) {
+        this.state.inputValue = ev.target.value;
         this.props.record.update({ [this.props.name]: ev.target.value });
     }
 
@@ -63,6 +69,8 @@ export class BanAddressWidget extends Component {
     async selectSuggestion(feature) {
         const p = feature.properties;
         const [lon, lat] = feature.geometry.coordinates;
+
+        this.state.inputValue = p.name;
 
         const updates = {
             street: p.name,

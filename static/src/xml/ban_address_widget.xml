@@ -8,7 +8,7 @@
                     type="text"
                     class="o_input"
                     t-att-id="props.id"
-                    t-att-value="displayValue"
+                    t-att-value="state.inputValue"
                     t-att-placeholder="props.placeholder or 'Saisir une adresse...'"
                     autocomplete="off"
                     t-on-input="onInput"
