@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="ibatix_adresse.BanAddressWidget">
+        <div class="ban-address-wrapper o_field_widget o_field_char">
+            <t t-if="!props.readonly">
+                <input
+                    t-ref="input"
+                    type="text"
+                    class="o_input"
+                    t-att-id="props.id"
+                    t-att-value="displayValue"
+                    t-att-placeholder="props.placeholder or 'Saisir une adresse...'"
+                    autocomplete="off"
+                    t-on-input="onInput"
+                    t-on-change="onChange"
+                    t-on-blur="onBlur"
+                />
+                <ul t-if="state.open" class="ban-suggestions-list">
+                    <li
+                        t-foreach="state.suggestions"
+                        t-as="feat"
+                        t-key="feat_index"
+                        t-on-mousedown.prevent="() => selectSuggestion(feat)"
+                    >
+                        <strong t-esc="feat.properties.name"/>
+                        <span class="ban-suggestion-locality"
+                              t-esc="' — ' + feat.properties.postcode + ' ' + feat.properties.city"/>
+                    </li>
+                </ul>
+            </t>
+            <span t-else="" t-esc="displayValue"/>
+        </div>
+    </t>
+</templates>

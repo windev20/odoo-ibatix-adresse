@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_ban_address" model="ir.ui.view">
+        <field name="name">res.partner.form.ban.address</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Widget autocomplétion BAN sur le champ rue -->
+            <field name="street" position="attributes">
+                <attribute name="widget">ban_address</attribute>
+                <attribute name="placeholder">Saisir l’adresse pour autocomplétion...</attribute>
+            </field>
+
+            <!-- Champs BAN invisibles (ban_id, coordonnées) — utilisés pour DPE -->
+            <field name="street" position="after">
+                <field name="ban_id" invisible="1"/>
+                <field name="ban_latitude" invisible="1"/>
+                <field name="ban_longitude" invisible="1"/>
+            </field>
+
+        </field>
+    </record>
+</odoo>
