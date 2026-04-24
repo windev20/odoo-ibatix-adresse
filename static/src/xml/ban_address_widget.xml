@@ -20,7 +20,8 @@
                         t-foreach="state.suggestions"
                         t-as="feat"
                         t-key="feat_index"
-                        t-on-mousedown.prevent="() => selectSuggestion(feat)"
+                        t-att-data-idx="feat_index"
+                        t-on-mousedown.prevent="onSuggestionMousedown"
                     >
                         <strong t-esc="feat.properties.name"/>
                         <span class="ban-suggestion-locality"

@@ -23,7 +23,12 @@ export class BanAddressWidget extends Component {
         this.inputRef = useRef("input");
         this.orm = useService("orm");
         this.debouncedFetch = useDebounced(this._fetchBan.bind(this), 350);
-        this.selectSuggestion = this.selectSuggestion.bind(this);
+    }
+
+    onSuggestionMousedown(ev) {
+        const idx = parseInt(ev.currentTarget.dataset.idx, 10);
+        const feat = this.state.suggestions[idx];
+        if (feat) this.selectSuggestion(feat);
     }
 
     get displayValue() {
